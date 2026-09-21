@@ -41,8 +41,6 @@ VertexCortexApp
 			
 		//drawRect(70, 100, 60, 60, packColorBGR(255, 255, 255), *MainWindow.mainBuffer);
 
-		
-
 		// Test values!!
 		Vec2 A = { 400, 500 };
 		Vec2 B = { 600, 100 };
