@@ -13,6 +13,7 @@ void drawRectGPU(int x, int y, int width, int height, uint32_t colour, frameBuff
 	//compute
 	drawRectKernel<<<height, width>>>(x, y, width, height, fb->height, fb->width, colour, fb->gpuColourBuffer);
 
+	cudaDeviceSynchronize();
 	// update main framebuffer
 	fb->updateHostColourbuffer();
 
