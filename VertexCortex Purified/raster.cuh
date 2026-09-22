@@ -9,6 +9,6 @@
 
 
 // first kernel to work on!
-void drawRectGPU(int x, int y, int width, int height, uint32_t colour, Window*);
+void drawRectGPU(int x, int y, int width, int height, uint32_t colour, frameBuffer*);
 
-__global__ void drawRectKernel(int x_start, int y_start, int width, int height, uint32_t colour, frameBuffer*);
+__global__ void drawRectKernel(int x_start, int y_start, int width, int height, int fbHeight, int fbWidth, uint32_t colour, uint32_t* cb);

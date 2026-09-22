@@ -91,7 +91,7 @@ void testCode(frameBuffer* fb, Window* window) {
 
 	//drawRect(70, 100, 60, 60, packColourBGR(255, 255, 255), *window->mainBuffer);
 
-	drawRectGPU(70, 100, 60, 60, packColourBGR(255, 255, 255), window);
+	drawRectGPU(70, 100, 60, 60, packColourBGR(255, 255, 255), window->mainBuffer);
 
 	// Test values!!
 	Vec2 A = { 400, 500 };

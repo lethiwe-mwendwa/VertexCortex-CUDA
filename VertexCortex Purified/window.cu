@@ -37,13 +37,6 @@ Window::Window(const wchar_t* ClassName, const wchar_t* WindowText, HINSTANCE hI
         this   // <--- allows us to access window!
     );
 
-    cudaError_t cudaStatus;
-
-    cudaStatus = cudaMalloc((void**)&gpuBuffer, sizeof(frameBuffer));
-    if (cudaStatus != cudaSuccess) {
-        fprintf(stderr, "cudaMalloc failed!");
-    }
-
     isRunning = true;
 
 }

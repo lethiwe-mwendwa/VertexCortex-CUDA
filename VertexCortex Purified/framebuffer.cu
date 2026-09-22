@@ -9,8 +9,20 @@ frameBuffer::frameBuffer(size_t width, size_t height)
 {
     colourBuffer = new uint32_t[height * width];
 
+    //CUDA STUFF
+    cudaError_t cudaStatus;
+
+    cudaStatus = cudaMalloc((void**)&gpuColourBuffer, height * width * sizeof(uint32_t));
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "cudaMalloc failed!");
+    }
+
+
+    // used in update, so must be applied here.
     this->width = width;
     this->height = height;
+
+    updateDeviceColourbuffer();
 
     // For Win32
     bitmapInfo = {};
@@ -25,6 +37,7 @@ frameBuffer::frameBuffer(size_t width, size_t height)
 frameBuffer::~frameBuffer()
 {
     delete[] colourBuffer;
+    cudaFree(gpuColourBuffer);
 }
 
 void frameBuffer::clear(uint32_t colour)
@@ -71,8 +84,8 @@ void frameBuffer::present(HDC deviceContext)
 }
 
 // PROBLEM what you're copying... has a pointer. THATS A BIG NONO DUDE
-void updateDeviceframebuffer(frameBuffer* deviceBuffer, frameBuffer* hostBuffer) {
-    cudaError_t cudaStatus = cudaMemcpy(deviceBuffer, hostBuffer, sizeof(frameBuffer), cudaMemcpyHostToDevice);
+void frameBuffer::updateDeviceColourbuffer() {
+    cudaError_t cudaStatus = cudaMemcpy(gpuColourBuffer, colourBuffer, height * width * sizeof(uint32_t), cudaMemcpyHostToDevice);
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "cudaMemcpy failed!");
     }
@@ -80,9 +93,8 @@ void updateDeviceframebuffer(frameBuffer* deviceBuffer, frameBuffer* hostBuffer)
 
 }
 
-
-void updateHostframebuffer(frameBuffer* hostBuffer, frameBuffer* deviceBuffer) {
-    cudaError_t cudaStatus = cudaMemcpy(hostBuffer, deviceBuffer, sizeof(frameBuffer), cudaMemcpyDeviceToHost);
+void frameBuffer::updateHostColourbuffer() {
+    cudaError_t cudaStatus = cudaMemcpy(colourBuffer, gpuColourBuffer, height * width * sizeof(uint32_t), cudaMemcpyDeviceToHost);
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "cudaMemcpy failed!");
     }

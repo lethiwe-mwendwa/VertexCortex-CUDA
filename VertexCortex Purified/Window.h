@@ -13,7 +13,6 @@ public:
 	bool isRunning = false;
 	HWND handler;
 	frameBuffer* mainBuffer;
-	frameBuffer* gpuBuffer;
 
 	Clock timer;
 

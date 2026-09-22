@@ -28,15 +28,17 @@ public:
 	// Use BGR storage
 	uint32_t* colourBuffer;
 
+	uint32_t* gpuColourBuffer;
+
+	void updateHostColourbuffer();
+
+	void updateDeviceColourbuffer();
+	
+
 private:
 
 
 };
-
-
-void updateDeviceframebuffer(frameBuffer* deviceBuffer, frameBuffer* hostBuffer);
-
-void updateHostframebuffer(frameBuffer* hostBuffer, frameBuffer* deviceBuffer);
 
 
 uint32_t packColourBGR(uint8_t r, uint8_t g, uint8_t b);
