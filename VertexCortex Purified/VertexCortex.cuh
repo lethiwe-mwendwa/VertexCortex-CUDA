@@ -6,9 +6,6 @@
 // Remember... you can actually just include things in the implementation parts. No need to dirtify your application code with 2nd hand .h files
 
 #include <windows.h>
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
-#include <stdio.h>
 
 #define VertexCortexApp INT WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_  LPSTR lpCmdLine, _In_  INT nCmdShow)
 

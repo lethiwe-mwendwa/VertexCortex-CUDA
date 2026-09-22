@@ -132,13 +132,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="framebuffer.cpp" />
+    <ClCompile Include="framebuffer.cu" />
     <ClCompile Include="Manual Testing.cpp" />
     <ClCompile Include="math.cpp" />
     <ClCompile Include="raster.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="VertexCortex.cu" />
-    <ClCompile Include="window.cpp" />
+    <ClCompile Include="window.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framebuffer.h" />
