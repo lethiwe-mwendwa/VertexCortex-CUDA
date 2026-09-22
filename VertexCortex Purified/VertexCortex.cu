@@ -1,8 +1,10 @@
-#include "VertexCortex.h"
+#include "VertexCortex.cuh"
 #include "window.h"
 #include "raster.h"
 #include <Windows.h>
 #include "vertex.h"
+
+#include "raster.cuh"
 
 // MAIN FUNCTION
 VertexCortexApp
@@ -53,6 +55,8 @@ VertexCortexApp
 		Vertex2 Cv = {Vec2(600, 500), Colour(0, 0, 255) };
 
 		drawTriangle(Av, Bv, Cv, *MainWindow.mainBuffer);
+
+		//drawRectKernel<<>>
 
 		// 3. Render to framebuffer based on new world data 
 		// //(INTERNAL THING I NEED TO DO. WITH THE WINDOW BITMAP) 

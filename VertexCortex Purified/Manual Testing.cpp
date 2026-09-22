@@ -1,6 +1,6 @@
 // VertexCortex Purified Testing
 
-#include "VertexCortex.h"
+#include "VertexCortex.cuh"
 #include <string>
 
 // Code that will be run once at the start, prior to window creation
