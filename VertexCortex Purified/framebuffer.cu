@@ -1,5 +1,9 @@
 #include "framebuffer.h"
 
+// New stuff for the new GPUbuffer
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+
 
 frameBuffer::frameBuffer(size_t width, size_t height)
 {
@@ -64,6 +68,25 @@ void frameBuffer::present(HDC deviceContext)
         SRCCOPY               // raster operation
     );
 
+}
+
+// PROBLEM what you're copying... has a pointer. THATS A BIG NONO DUDE
+void updateDeviceframebuffer(frameBuffer* deviceBuffer, frameBuffer* hostBuffer) {
+    cudaError_t cudaStatus = cudaMemcpy(deviceBuffer, hostBuffer, sizeof(frameBuffer), cudaMemcpyHostToDevice);
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "cudaMemcpy failed!");
+    }
+    return;
+
+}
+
+
+void updateHostframebuffer(frameBuffer* hostBuffer, frameBuffer* deviceBuffer) {
+    cudaError_t cudaStatus = cudaMemcpy(hostBuffer, deviceBuffer, sizeof(frameBuffer), cudaMemcpyDeviceToHost);
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "cudaMemcpy failed!");
+    }
+    return;
 }
 
 // Red, green, blue to bgr binary storage

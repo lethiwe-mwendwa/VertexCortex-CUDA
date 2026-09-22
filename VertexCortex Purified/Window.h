@@ -13,9 +13,12 @@ public:
 	bool isRunning = false;
 	HWND handler;
 	frameBuffer* mainBuffer;
+	frameBuffer* gpuBuffer;
+
 	Clock timer;
 
 	void display();
+
 
 protected:
 	const wchar_t* WindowText;

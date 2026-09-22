@@ -1,5 +1,12 @@
 #include "window.h"
 
+// New stuff for the new GPUbuffer
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+
+#include <stdio.h>
+//
+
 Window::Window(const wchar_t* ClassName, const wchar_t* WindowText, HINSTANCE hInstance, int nCmdShow)
 {
     // shaboingboing
@@ -29,6 +36,13 @@ Window::Window(const wchar_t* ClassName, const wchar_t* WindowText, HINSTANCE hI
         hInstance,  // Instance handle
         this   // <--- allows us to access window!
     );
+
+    cudaError_t cudaStatus;
+
+    cudaStatus = cudaMalloc((void**)&gpuBuffer, sizeof(frameBuffer));
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "cudaMalloc failed!");
+    }
 
     isRunning = true;
 

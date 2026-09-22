@@ -4,8 +4,11 @@
 #include "device_launch_parameters.h"
 #include <stdio.h>
 #include "framebuffer.h"
+#include "Window.h"
 #include <iostream>
 
 
 // first kernel to work on!
-__global__ void drawRectKernel(int x, int y, int width, int height, uint32_t colour, frameBuffer&);
+void drawRectGPU(int x, int y, int width, int height, uint32_t colour, Window*);
+
+__global__ void drawRectKernel(int x_start, int y_start, int width, int height, uint32_t colour, frameBuffer*);
